@@ -1,5 +1,8 @@
-FROM golang:1.10-stretch
+FROM golang:1.12
 
-WORKDIR /tmp/src
-ADD src .
-RUN ./prepare.sh
+WORKDIR /go/github.com/rdsubhas/grpc-rest-sidecar
+ADD go.* ./
+RUN go get && \
+    go get -u github.com/golang/protobuf/protoc-gen-go
+
+ADD . .
